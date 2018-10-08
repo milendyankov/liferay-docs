@@ -1,0 +1,78 @@
+= @product@ Knowledge Base
+Liferay's Knowledge Management Team and contributors
+7.1, 2018.10.07
+:toc: left
+
+Welcome to the @product@ knowledge base. The knowledge base for @product@ is split into two sections.
+
+== Documentation
+
+This section contains information about all of the @product@'s features. It expleains how they are designed and how they are meant to be used.
+
+* link:Documentation/User[User documentation]
+* link:Documentation/DevOps[DevOps documentation]
+
+== Tutorials
+
+This section contains practical tutorials explaining how to achieve a desired result step by step
+
+=== User Management
+
+* link:#[How to customise the login screen]
+* link:#[How to add social login]
+* link:#[...]
+
+=== Deployment
+
+* link:#[How to install @prodcut@ on AWS]
+* link:#[How to install @prodcut@ on OpenShift]
+* link:#[...]
+
+=== Tools
+
+* link:#[How to configure Eclipse]
+* link:#[How to configure IntelliJ IDEA]
+* link:#[...]
+
+=== ...
+
+* link:#[...]
+* link:#[...]
+
+
+
+== Tools
+
+This section provides information about the tools that make it easier to work with the portal
+
+* link:#[Blade and Workspace]
+* link:#[Maven]
+* link:#[Gradle]
+* link:#[NPM]
+* link:#[...]
+
+== Related technologies 
+
+This section provides information about 3rd party technologies used in @product@ :
+
+=== Technologies
+
+* link:#[Portlet]
+* link:#[OSGi]
+* link:#[--Spring--]
+* link:#[...]
+
+=== Products
+
+* link:Related/Elasticsearch[Elasticsearch]
+* link:Related/Solr[Solr]
+* link:#[...]
+
+== Extensions
+
+This section provides information about extensions of the @product@ available on http://liferay.com/marketplace[Marketplace] or via other channels.
+
+link:Extensions[Go to extensions]
+
+
+

@@ -1,0 +1,21 @@
+= @product@ - Elasticsearch 
+Liferay's Knowledge Management Team and contributors
+7.1, 2018.10.07
+:toc: left
+:toclevels: 3
+:sectnums:
+:includedir: Related/Elasticsearch
+
+:leveloffset: +1
+
+include::{includedir}/embedded-vs-remote.adoc[]
+
+include::{includedir}/Embedded/Embedded.adoc[]
+
+include::{includedir}/Remote/Remote.adoc[]
+
+include::{includedir}/advanced-configuration.adoc[]
+
+include::{includedir}/troubleshooting.adoc[]
+
+:leveloffset: -1

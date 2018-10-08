@@ -1,0 +1,51 @@
+= Setup Wizard
+
+The Setup Wizard runs when you start @product@ for the first time. The title of
+the setup wizard page is Basic Configuration. This page provides a convenient
+way to make an initial configuration.
+
+There are two sections of the wizard: the portal and the administrator.  For the
+portal, you need to supply the following information:
+
+*Portal Name:* the name of the portal you're powering with @product@.
+
+*Default Language:* choose the default locale of your portal.
+
+For the administrator, you need to supply the following information:
+
+*First Name:* the first name of the default administrator user
+
+*Last Name:* the last name of the default administrator user
+
+*Email:* the email address of the default administrator user
+
+image::basic-configuration1.png[Figure 1: Supply the information for your portal and your portal's default administrator user on the Basic Configuration page.]
+
+The Basic Configuration page also includes a checkbox labeled _Add Sample Data_.
+If you check this box, sample data is added to your database. This data includes
+users, sites, and organizations. The sample data is for demo purposes. If you're
+installing @product@ on your own machine to explore its features, the sample
+data may be useful. If, however, you're installing @product@ on a real server,
+start with a clean system.
+
+Once you've filled out the form, click _Finish Configuration_. The setup wizard
+creates a `portal-setup-wizard.properties` file which stores the settings that
+you entered. When you begin customizing your portal's configuration, however,
+use the `portal-ext.properties` file you created earlier. All the
+possible properties that can be placed in this file are documented in
+http://docs.liferay.com/portal/7.0/propertiesdoc[our reference documentation].
+
+== Disable Setup Wizard
+
+The wizard is an extremely helpful tool, especially if you're setting
+up @product@ for the first time. If you're a veteran and you already have
+your various properties set up, you can disable the setup wizard. If you disable
+the setup wizard, you must configure everything manually from the
+`portal-ext.properties` file. To disable the setup wizard, enter
+`setup.wizard.enabled=false` in your `portal-ext.properties` file. 
+
+[Note]
+====
+Property values in `portal-setup-wizard.properties` (the file created in Liferay
+Home by the setup wizard) override property values in `portal-ext.properties`.
+====

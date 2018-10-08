@@ -1,0 +1,9 @@
+= @product@ - Solr 
+Liferay's Knowledge Management Team and contributors
+7.1, 2018.10.07
+:toc: left
+:toclevels: 3
+:sectnums:
+
+
+TODO

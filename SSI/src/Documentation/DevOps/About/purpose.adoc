@@ -1,0 +1,10 @@
+= Purpose
+
+@product@ provides a robust _platform_ to build your site on quickly and serve
+it to all clients--desktop, mobile, or anything in between. It provides all the
+standard _applications_ you need your site to run. It provides an easy to use
+development _framework_ for new applications or customization. On top of this,
+@product@ is developed using an open source methodology, by people from around
+the world. The code base is solid, reliable, and stable in mission critical
+deployments in diverse industries.
+

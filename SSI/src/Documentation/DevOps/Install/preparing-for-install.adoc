@@ -1,0 +1,16 @@
+= Preparing for Install
+
+Installing @product@ is easy. But before you begin, you should answer a few
+questions.
+
+* Which version of Liferay will you install?
+* On which application server will you install @product@?
+* Can you install a @product@ bundle or do you need to install @product@ on an
+existing application server?
+* Which database will you use with @product@?
+* How do you plan to store your data?
+* Can your network support @product@?
+
+
+
+

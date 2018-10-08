@@ -1,0 +1,26 @@
+= Marketplace
+
+The https://www.liferay.com/marketplace[Liferay Marketplace] is an integral part of the @product@ experience. The
+Marketplace plugin is required to be installed on @product@. The Marketplace
+plugin enables a host of features that extend beyond just access to the online
+Liferay Marketplace. Some of the key features the Marketplace plugin enables are
+
+* Liferay Marketplace: direct access to our online Marketplace
+* App Manager: ability to install, uninstall, and update apps
+* Bundled Apps: easily manage apps that may come bundled with your @product@
+* Developer Apps: ability to manage apps that you're developing
+* License Manager: streamlined license management for your @product@ and apps
+
+For this reason, you must ensure that Marketplace can run and configure itself.
+
+== No Internet access
+
+Your server might be behind a firewall that prevents access to the Internet. Or
+your security policy might not allow direct download and installation from the
+Internet. In these cases, from an Internet-enabled computer, download the
+https://www.liferay.com/marketplace/download[Marketplace plugin]. Install the plugin in one of the following ways:
+
+*  Allow @product@ to auto deploy it by dropping the downloaded `.lpkg`
+file into the `deploy` folder in `Liferay Home`.
+* Deploy it using the `App Manager`.
+

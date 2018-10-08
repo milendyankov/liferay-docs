@@ -1,0 +1,7 @@
+= Embedded Elasticsearch
+
+:leveloffset: +1
+
+include::configuration.adoc[]
+
+:leveloffset: -1

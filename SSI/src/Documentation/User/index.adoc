@@ -1,0 +1,11 @@
+= @product@ - User documentation
+Liferay's Knowledge Management Team and contributors
+7.1, 2018.10.07
+:toc: left
+:toclevels: 3
+:sectnums: 
+:source-highlighter: coderay
+:imagesdir: images
+:includedir: Documentation/User
+
+TODO

@@ -1,0 +1,23 @@
+= Initial setup
+
+Before you start @product@ you need to configure it. 
+
+:leveloffset: +1
+
+include::setup-wizard.adoc[]
+
+include::database.adoc[]
+
+include::documents-and-media.adoc[]
+
+include::mail-server.adoc[]
+
+include::network.adoc[]
+
+include::indexing.adoc[]
+
+include::ports.adoc[]
+
+include::marketplace.adoc[]
+
+:leveloffset: -1

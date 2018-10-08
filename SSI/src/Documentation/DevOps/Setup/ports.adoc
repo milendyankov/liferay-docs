@@ -1,0 +1,21 @@
+= Ports
+
+== HTTP / AJP ports
+
+Liferay's application server (e.g., Tomcat or
+Wildfly) uses certain ports for purposes like handling incoming HTTP
+requests, HTTPS requests, or AJP requests, etc. If you start your
+application server in debug mode, there's a port listening for a debugger to
+connect. If desired, you can configure these ports. Please refer to your
+application server's documentation for information on its default ports and
+how to configure them.
+
+== Remote Console port
+
+Liferay also provides access to its OSGi framework through a configurable
+port:
+
+    module.framework.properties.osgi.console=localhost:11311
+
+You can override this default property by copying the line above to your
+`LIFERAY_HOME/portal-ext.properties` file and adjusting the port number.

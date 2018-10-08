@@ -1,0 +1,14 @@
+= Remote Elasticsearch instance(s)
+
+
+:leveloffset: +1
+
+include::install.adoc[]
+
+include::configuring-the-connector.adoc[]
+
+include::tuning.adoc[]
+
+include::back-up.adoc[]
+
+:leveloffset: -1

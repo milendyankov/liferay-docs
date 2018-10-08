@@ -1,0 +1,326 @@
+= Installing @product@ on Wildfly
+
+If you can not or don't want to use the @product@ bundle, you can install it on existing Wildfly server.
+
+You need to download the following files from https://www.liferay.com/downloads-community[]
+
+* @product@ WAR file
+* Dependencies ZIP file
+* OSGi JARs ZIP file
+
+== Dependencies 
+
+@product@ depends on many JARs that are included in the @product@ Wildfly bundle. Some of the bundle's JARs are not strictly required but can still be useful. If you don't have a @product@ Wildfly bundle, download the required JARs from third-parties as described below.
+
+. Create the folder `$WILDFLY_HOME/modules/com/liferay/portal/main` if it doesn't exist and extract the dependencies ZIP JARs to it:
+    * `com.liferay.petra.concurrent.jar`
+    * `com.liferay.petra.executor.jar`
+    * `com.liferay.petra.function.jar`
+    * `com.liferay.petra.io.jar`
+    * `com.liferay.petra.lang.jar`
+    * `com.liferay.petra.memory.jar`
+    * `com.liferay.petra.nio.jar`
+    * `com.liferay.petra.process.jar`
+    * `com.liferay.petra.reflect.jar`
+    * `com.liferay.petra.string.jar`
+    * `com.liferay.registry.api.jar`
+    * `hsql.jar`
+    * `portal-kernel.jar`
+    * `portlet.jar`
+. Download your database driver `.jar` file and copy it into the same folder. For example, http://dev.mysql.com/downloads/connector/j/[copy MySQL's driver] into the `$WILDFLY_HOME/modules/com/liferay/portal/main` folder. The `mariadb.jar`, `mysql.jar`, and `postgresql.jar` driver JARs are also available in the Wildfly bundle.
+. Create the file `module.xml` in the `$WILDFLY_HOME/modules/com/liferay/portal/main` folder and insert this
+configuration:
+
+.module.xml
+[source, xml]
+----
+<?xml version="1.0"?>
+
+<module xmlns="urn:jboss:module:1.0" name="com.liferay.portal">
+    <resources>
+        <resource-root path="com.liferay.petra.concurrent.jar" />
+        <resource-root path="com.liferay.petra.executor.jar" />
+        <resource-root path="com.liferay.petra.function.jar" />
+        <resource-root path="com.liferay.petra.io.jar" />
+        <resource-root path="com.liferay.petra.lang.jar" />
+        <resource-root path="com.liferay.petra.memory.jar" />
+        <resource-root path="com.liferay.petra.nio.jar" />
+        <resource-root path="com.liferay.petra.process.jar" />
+        <resource-root path="com.liferay.petra.reflect.jar" />
+        <resource-root path="com.liferay.petra.string.jar" />
+        <resource-root path="com.liferay.registry.api.jar" />
+        <resource-root path="hsql.jar" />
+        <resource-root path="mysql.jar" />
+        <resource-root path="portal-kernel.jar" />
+        <resource-root path="portlet.jar" />
+    </resources>
+    <dependencies>
+        <module name="javax.api" />
+        <module name="javax.mail.api" />
+        <module name="javax.servlet.api" />
+        <module name="javax.servlet.jsp.api" />
+        <module name="javax.transaction.api" />
+    </dependencies>
+</module>
+----
+
+If you use a different database, replace the MySQL `.jar` with the driver JAR for your database (e.g., HSQL, PostgreSQL, etc.).
+
+. Create an `osgi` folder in your Liferay Home folder. Extract the OSGi ZIP file that you downloaded into the `osgi` folder.
+
+The `osgi` folder provides the necessary modules for @product@'s OSGi runtime.
+
+=== Checkpoint
+
+. At this point, you should have the following files in the `$WILDFLY_HOME/modules/com/liferay/portal/main` folder:
+    * `com.liferay.petra.concurrent`
+    * `com.liferay.petra.executor.jar`
+    * `com.liferay.petra.function.jar`
+    * `com.liferay.petra.io.jar`
+    * `com.liferay.petra.lang.jar`
+    * `com.liferay.petra.memory.jar`
+    * `com.liferay.petra.nio.jar`
+    * `com.liferay.petra.process.jar`
+    * `com.liferay.petra.reflect.jar`
+    * `com.liferay.petra.string.jar`
+    * `com.liferay.registry.api.jar`
+    * `portal-kernel.jar`
+    * `portlet.jar`
+    * a database JAR such as the MySQL Connector.
+. The `module.xml` has listed all JARs in the `<resource-root-path>` elements.
+. The `osgi` folder has the following subfolders:
+    * `configs`
+    * `core`
+    * `marketplace`
+    * `modules`
+    * `portal`
+    * `static`
+    * `test`
+    * `war`
+
+== Standalone Mode vs. Domain Mode 
+
+Wildfly can be launched in either _standalone_ mode or _domain_ mode. Domain mode allows multiple application server instances to be managed from a single control point. A collection of such application servers is known as a _domain_. For more information on standalone mode vs. domain mode, please refer to the section on this topic in the
+https://docs.jboss.org/author/display/WFLY/Admin+Guide#AdminGuide-Operatingmodes[Wildfly Admin Guide].
+@product@ fully supports Wildfly in standalone mode but not in domain mode.
+
+You can run @product@ on Wildfly in domain mode, but this method is not fully
+supported. In particular, @product@'s hot-deploy does not work with a managed
+deployment, since Wildfly manages the content of a managed deployment by copying
+files (exploded or non-exploded). This prevents JSP hooks and Ext plugins from
+working as intended. For example, JSP hooks don't work on Wildfly running in
+managed domain mode, since @product@'s JSP override mechanism relies on the
+application server. Since both of these features are deprecated, however, you
+may not be using them.
+
+The command line interface is recommended for domain mode deployments.
+
+
+[NOTE]
+----
+This does not prevent @product@ from running in a clustered
+environment on multiple Wildfly servers. You can set up a cluster of @product@
+instances running on Wildfly servers running in standalone mode. Please refer to
+the chapter of this guide on
+link:/discover/deployment/-/knowledge_base/7-1/liferay-clustering[@product@ Clustering]
+for information on setting up a @product@ cluster.
+----
+
+== Wildfly configuration
+
+
+Make the following modifications to `$WILDFLY_HOME/standalone/configuration/standalone.xml`:
+
+=== Encoding
+
+Locate the closing `</extensions>` tag. Directly beneath that tag, insert the following system properties:
+
+.standalone.xml
+[source, xml]
+----
+<system-properties>
+    <property name="org.apache.catalina.connector.URI_ENCODING" value="UTF-8" />
+    <property name="org.apache.catalina.connector.USE_BODY_ENCODING_FOR_QUERY_STRING" value="true" />
+</system-properties>
+----
+
+=== Filter
+
+Add the following `<filter-spec>` tag within the `<console-handler>` tag,
+directly below the `<level name="INFO"/>` tag:
+
+.standalone.xml
+[source, xml]
+----
+<filter-spec value="not(any(match(&quot;WFLYSRV0059&quot;),match(&quot;WFLYEE0007&quot;)))" />
+----
+
+=== Timeout 
+Add a timeout for the deployment scanner by setting `deployment-timeout="360"` as seen in the excerpt below.
+
+.standalone.xml
+[source, xml]
+----
+<subsystem xmlns="urn:jboss:domain:deployment-scanner:2.0">
+    <deployment-scanner deployment-timeout="360" path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/>
+</subsystem>
+----
+
+=== Security
+
+Add the following JAAS security domain to the security subsystem `<security-domains>` defined in element `<subsystem xmlns="urn:jboss:domain:security:2.0">`.
+
+.standalone.xml
+[source, xml]
+----
+<security-domain name="PortalRealm">
+    <authentication>
+        <login-module code="com.liferay.portal.security.jaas.PortalLoginModule" flag="required" />
+    </authentication>
+</security-domain>
+----
+
+=== Remove default configuration
+
+Remove the following Weld-related tags
+* `<extension module="org.jboss.as.weld"/>`
+* `<subsystem xmlns="urn:jboss:domain:weld:4.0"/>`
+
+Remove the two code snippets providing welcome content:
+
+.standalone.xml
+[source, xml]
+----
+<location name="/" handler="welcome-content"/>
+...
+<handlers>
+    <file name="welcome-content" path="${jboss.home.dir}/welcome-content"/>
+</handlers>
+----
+
+=== JSP
+
+Find the `<jsp-config/>` tag and set the `development`, `source-vm`, and
+`target-vm` attributes in the tag. Once finished, the tag should look like
+this:
+
+.standalone.xml
+[source, xml]
+----
+<jsp-config development="true" source-vm="1.8" target-vm="1.8" />
+----
+
+=== Checkpoint
+
+Before continuing, verify the following properties have been set in the `standalone.xml` file:
+
+. The new `<system-property>` is added.
+. The new `<filter-spec>` is added.
+. The `<deployment-timeout>` is set to `360`.
+. The new `<security-domain>` is created.
+. Weld tags are removed.
+. Welcome content is removed.
+. The `<jsp-config>` tag contains its new attributes.
+
+== JVM
+
+In the `$WILDFLY_HOME/bin/` folder, you must make these modifications to your
+standalone domain's configuration script file `standalone.conf`
+(`standalone.conf.bat` on Windows):
+
+=== Windows
+
+Comment out the initial `JAVA_OPTS` assignment like this:
+
+.standalone.conf.bat
+[source, bat]
+----
+rem set "JAVA_OPTS=-Xms64M -Xmx512M -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m"
+----
+
+Add the following `JAVA_OPTS` assignment one line above the `:JAVA_OPTS_SET` line found at end of the file:
+
+.standalone.conf.bat
+[source, bat]
+----
+set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djboss.as.management.blocking.timeout=480 -Duser.timezone=GMT -Xmx2048m -XX:MaxMetaspaceSize=512m -XX:MetaspaceSize=200m"
+----
+
+*Unix:*
+
+Below the `if [ "x$JAVA_OPTS" = "x" ];` statement, replace this `JAVA_OPTS` statement:
+
+.standalone.conf
+----
+JAVA_OPTS="-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true"
+----
+ 
+with this:
+
+.standalone.conf
+----
+ JAVA_OPTS="-Djava.net.preferIPv4Stack=true"
+----
+
+
+Add the following statement to the bottom of the file:
+
+.standalone.conf
+----
+JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true  -Djboss.as.management.blocking.timeout=480 -Duser.timezone=GMT -Xmx2048m -XX:MaxMetaspaceSize=512m -XX:MetaspaceSize=200m"
+----
+
+[NOTE]
+====
+If you plan on using the IBM JDK with your Wildfly server, you must complete some additional steps. First, navigate to the `$WILDFLY_HOME/modules/com/liferay/portal/main/module.xml` file and insert the following dependency within the `<dependencies>` element:
+
+    <module name="ibm.jdk" />
+
+Then navigate to the `$WILDFLY_HOME/modules/system/layers/base/sun/jdk/main/module.xml` file and insert the following path names inside the `+<paths>...</paths>+` element:
+
+    <path name="com/sun/crypto" />
+    <path name="com/sun/crypto/provider" />
+    <path name="com/sun/org/apache/xml/internal/resolver" />
+    <path name="com/sun/org/apache/xml/internal/resolver/tools" />
+
+The added paths resolve issues with deployment exceptions and image uploading problems.
+====
+
+*Checkpoint:*
+
+. The file encoding, user time-zone, preferred protocol stack have been set in
+the `JAVA_OPTS` in the `standalone.conf.bat` file.
+. The default amount of memory available has been increased.
+
+== Setup
+
+Follow the steps in the link:#_initial_setup[Initial setup] section.
+
+== Deploy @product@
+
+. If the folder `$WILDFLY_HOME/standalone/deployments/ROOT.war` already exists
+in your Wildfly installation, delete all of its subfolders and files.
+Otherwise, create a new folder called
+`$WILDFLY_HOME/standalone/deployments/ROOT.war`.
+. Unzip the @product@ `.war` file into the `ROOT.war` folder.
+. To trigger deployment of `ROOT.war`, create an empty file named
+`ROOT.war.dodeploy` in your `$WILDFLY_HOME/standalone/deployments/` folder.
+On startup, Wildfly detects the presence of this file and deploys it as a
+web application.
+. Start the Wildfly application server by navigating to `$WILDFLY_HOME/bin`
+and running `standalone.bat` or `standalone.sh`.
+
+====
+After deploying @product@, you may see excessive warnings and log messages, such
+as the ones below, involving `PhaseOptimizer`. These are benign and can be
+ignored. Make sure to adjust your app server's logging level or log filters to
+avoid excessive benign log messages.
+
+ May 02, 2018 9:12:27 PM com.google.javascript.jscomp.PhaseOptimizer$NamedPass process
+ WARNING: Skipping pass gatherExternProperties
+ May 02, 2018 9:12:27 PM com.google.javascript.jscomp.PhaseOptimizer$NamedPass process
+ WARNING: Skipping pass checkControlFlow
+ May 02, 2018 9:12:27 PM com.google.javascript.jscomp.PhaseOptimizer$NamedPass process
+ INFO: pass supports: [ES3 keywords as identifiers, getters, reserved words as properties, setters, string continuation, trailing comma, array pattern rest, arrow function, binary literal, block-scoped function declaration, class, computed property, const declaration, default parameter, destructuring, extended object literal, for-of loop, generator, let declaration, member declaration, new.target, octal literal, RegExp flag 'u', RegExp flag 'y', rest parameter, spread expression, super, template literal, modules, exponent operator (**), async function, trailing comma in param list]
+ current AST contains: [ES3 keywords as identifiers, getters, reserved words as properties, setters, string continuation, trailing comma, array pattern rest, arrow function, binary literal, block-scoped function declaration, class, computed property, const declaration, default parameter, destructuring, extended object literal, for-of loop, generator, let declaration, member declaration, new.target, octal literal, RegExp flag 'u', RegExp flag 'y', rest parameter, spread expression, super, template literal, exponent operator (**), async function, trailing comma in param list, object literals with spread, object pattern rest]
+====

@@ -1,0 +1,16 @@
+= Embedded vs. Remote Operation Mode 
+
+When you install @product@, Elasticsearch is already embedded. In embedded mode,
+Elasticsearch search runs in the same JVM to make it easy to test-drive with
+minimal configuration. Running both servers in the same process has drawbacks:
+
+* Elasticsearch must use the same JVM options as @product@.
+* @product@ and Elasticsearch compete for resources.
+
+[WARNING]
+====
+You wouldn't run an embedded database like HSQL in production, and you shouldn't
+run Elasticsearch in embedded mode in production either. Instead, run
+Elasticsearch in _remote operation mode_, as a standalone server or cluster of
+server nodes.
+====

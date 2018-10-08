@@ -1,0 +1,204 @@
+= @product@ - DevOps documentation
+Liferay's Knowledge Management Team and contributors
+7.1, 2018.10.07
+:toc: left
+:toclevels: 3
+:sectnums: 
+:source-highlighter: coderay
+:imagesdir: images
+:includedir: Documentation/DevOps
+
+
+:leveloffset: +1
+
+include::{includedir}/About/index.adoc[]
+
+include::{includedir}/Install/index.adoc[]
+
+include::{includedir}/Setup/index.adoc[]
+
+include::{includedir}/Run/index.adoc[]
+
+:leveloffset: -1
+
+== Architecture
+
+=== Understanding the core
+
+=== Understanding modules
+
+=== Understanding services 
+
+=== Understanding applications
+
+=== Understanding UI concepts
+
+== Development
+
+=== Modules
+
+==== OSGi bundles
+
+==== WARs
+
+=== Services
+
+==== Service Builder
+
+==== OSGi services
+
+===== Creating services
+
+===== Configuring services
+
+===== Wrapping services 
+
+==== JSON-WS services
+
+==== JAX-RS services
+
+==== JAX-WS services
+
+=== Portlets
+
+==== Liferay MVC Portlets
+
+===== Creating new MVC portlet
+
+===== Configuring MVC portlet
+
+===== Extending existing MVC portlet
+
+==== Liferay Soy Portlets
+
+===== Creating new Soy portlet
+
+===== Configuring Soy portlet
+
+===== Extending existing Soy portlet
+
+==== Spring MVC Portlets
+
+===== Creating new Spring MVC portlet
+
+===== Configuring Spring MVC portlet
+
+===== Extending existing Spring MVC portlet
+
+=== User interfaces
+
+==== Common concepts
+
+==== Available Javascript libraries
+
+==== Available Web services
+
+==== Themes
+
+===== Freemarker / velocity  templates 
+
+===== Calling services from a theme
+
+===== Embedding applications in a theme
+
+==== Layouts
+
+==== Portlet UIs
+
+===== Tag libraries
+
+==== SPA
+
+===== React
+
+===== Angular
+
+===== Vue.js
+
+==== Fragments
+
+== Frameworks
+
+=== Asset framework
+
+==== API reference
+
+==== Using it in custom services
+
+==== Modifying it for existing services
+
+=== Import / Export framework
+
+==== API reference
+
+==== Using it in custom services
+
+==== Modifying it for existing services
+
+=== Workflow framework
+
+==== API reference
+
+==== Using it in custom services
+
+==== Modifying it for existing services
+
+=== Permission checker
+
+==== API reference
+
+==== Using it in custom services
+
+==== Modifying it for existing services
+
+=== ...
+
+==== Using it in custom services
+
+==== Modifying it for existing services
+
+== Crosscutting concepts
+
+=== Security
+
+==== OAuth 
+
+==== Service Access Policies
+
+=== Performance
+
+==== Caching
+
+==== JVM tuning
+
+=== Internationalization
+
+==== I18n services
+
+===== Adding I18n to new services
+
+===== Updating I18n for existing services
+
+==== I18n portlets
+
+===== Adding I18n to new portlets
+
+===== Updating I18n for existing portlets
+
+==== I18n themes
+
+===== Adding I18n to new themes
+
+===== Updating I18n for existing themes
+
+=== Clustering
+
+== Testing
+
+=== Testing services
+
+=== Testing portlets
+
+=== Testing UIs
+
+== Upgrade

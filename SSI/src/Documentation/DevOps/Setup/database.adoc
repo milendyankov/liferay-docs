@@ -1,0 +1,111 @@
+= Database
+
+== @product@ controlled database
+
+Create a blank database schema encoded with the character set UTF-8. @product@ is a
+multilingual application and needs UTF-8 encoding to display all of its
+supported character sets.
+
+Create a database user for accessing this database. Grant this database user
+all rights, including the rights to create and drop tables, to the blank
+@product@ database.
+
+@product@ uses this database user's credentials to connect to the @product@
+database either directly or through its application server. During its initial
+startup, @product@ creates the tables it needs in the database you just created.
+It does this automatically, complete with indexes.
+
+This is the recommended way to set up @product@. It enables @product@ to
+maintain its database automatically during upgrades or when various @product@
+plugins that create database tables of their own are installed. This method is
+by far the best way to set up your @product@ database.
+
+
+== DBA controlled database
+
+[NOTE]
+====
+The instructions below are not ideal for @product@
+installations. This procedure is documented here so that enterprises with more
+restrictive standards can install @product@ with stricter (but sub-optimal)
+database settings. If it's at all possible, we recommend that you use the
+method described in the previous section instead of the procedure outlined
+below.
+====
+
+=== Granting permissions temporary
+
+Even though @product@ can create its database automatically, some enterprises
+prefer _not_ to allow the database user configured in an application server to
+have the database permissions necessary for @product@ and its plugins to
+maintain their tables. For these organizations, Select, Insert, Update and
+Delete are the only allowed permissions. Thus, in this section we explain how to
+set up the database manually. If your organization _is_ willing to grant the
+@product@ database user the permissions to create and drop tables in the
+database--and this is the recommended configuration--then simply use the
+recommended configuration described in the previous section.
+
+. Create a new, blank, database for @product@.
+. Grant full rights to do anything to the @product@ database to the @product@
+database user.
+. Install @product@ and start it so that it automatically populates its
+database.
+. Once the database has been populated with the @product@ tables, remove the
+permissions for creating and dropping tables from the @product@ database
+user.
+
+There are some caveats to running @product@ like this. Many @product@ plugins
+create new tables when they're deployed. Additionally, @product@ has an
+automatic database upgrade function that runs when @product@ is upgraded. If the
+@product@ database user doesn't have enough rights to create/modify/drop tables
+in the database, you must grant those rights to the ID before you deploy one of
+these plugins or start upgrading @product@. Once the tables are created or the
+upgrade is complete, you can remove those rights until the next deploy or
+upgrade. Additionally, your own developers might create plugins that need to
+create their own tables. These are just like @product@'s plugins that do the
+same thing, and they cannot be installed if @product@ can't create database
+tables. If you wish to install these plugins, you will need to grant rights to
+create tables in the database each time before you attempt to install them.
+
+=== SQL scripts
+
+TODO
+
+== Database connection
+
+=== via @product@ properties
+
+You can connect to your database with JNDI on your app server or the data source
+shipped with @product@ (recommended). Refer to the article on your app server
+for instructions on using JNDI. For the internal data source, you can configure
+it by specifying the configuration in a `portal-ext.properties` file or the
+link:/discover/deployment/-/knowledge_base/7-1/installing-liferay#using-liferays-setup-wizard[Setup Wizard]:
+
+. Create a `portal-ext.properties` file in your Liferay Home folder.
+. Copy a relevant example data source configuration from
+one of the
+link:/discover/reference/-/knowledge_base/7-0/database-templates[data source configuration templates]
+or
+link:@platform-ref@/7.1-latest/propertiesdoc/portal.properties.html#JDBC[portal properties reference's JDBC section]
+and paste it into the `portal-ext.properties` file.
+. Customize the configuration with the proper host name and user and password
+credentials for your database, and save the file.
+
+=== via JNDI
+
+To have your application server manage your database connection you must manually create this configuration. Create a text file
+called `portal-ext.properties` in your Liferay Home folder. This file overrides
+the default properties.
+
+To use your application server's data source, create a connection pool in your
+application server that points to your database. The connection pool should be
+called `jdbc/LiferayPool`. This is spelled out for each application server in
+its article. To tell @product@ to use your `jdbc/LiferayPool` connection pool,
+add the following directive to your `portal-ext.properties` file:
+
+ jdbc.default.jndi.name=jdbc/LiferayPool
+
+
+You should use the Control Panel to create the mail configuration. Go to
+_Control Panel &rarr; Configuration &rarr; Server Administration &rarr; Mail_
+and enter your settings for your mail session settings.

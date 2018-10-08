@@ -1,0 +1,8 @@
+= Documents and Media storage
+
+@product@ offers several configurations to store Documents and Media files by
+setting the `dl.store.impl=` property. Available options are Simple File System
+Store, Advanced File System Store, CMIS Store, DBStore, JCRStore, and Amazon
+S3Store. In addition, @product@ can be connected to various open source and
+enterprise-level document repositories. All of the repositories are connected to
+@product@ through hooks available on Liferay Marketplace (see below).

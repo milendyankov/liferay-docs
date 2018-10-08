@@ -1,0 +1,9 @@
+= What is @product@ 
+
+:leveloffset: +1
+
+include::purpose.adoc[]
+
+include::key-characteristics.adoc[]
+
+:leveloffset: -1

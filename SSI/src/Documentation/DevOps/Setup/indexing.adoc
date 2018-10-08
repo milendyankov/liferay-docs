@@ -1,0 +1,18 @@
+= Indexes and search 
+
+[NOTE]
+====
+@product@ by default ships with an embedded version of Elasticsearch. While this
+configuration works well for demo purposes, it is not supported in a production
+installation. After you install @product@, you'll should configure it to
+connect to a standalone Elasticsearch server or cluster. 
+====
+
+Elasticsearch and Solr are both supported, but there are some differences in how
+they work with @product@. If an application requires the use of the `TermsSetFilter` API or the
+Geolocation APIs you must use Elasticsearch as it is OLNY implemented in the Liferay's Elasticsearch Connector.
+
+
+Detailed about installing and configuring Elasticsearch is provided in link:../Related/Related.html#_elasticsearch["Elasticsearch" chapter of "Related technologies"] documentation.
+
+Detailed information about installing and configuring Solr is provided in link:../Related/Related.html#_solr["Solr" chapter of "Related technologies"]" documentation.
