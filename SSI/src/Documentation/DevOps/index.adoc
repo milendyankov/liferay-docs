@@ -31,9 +31,11 @@ include::{includedir}/Run/index.adoc[]
 
 === Understanding applications
 
+=== Understanding extension points
+
 === Understanding UI concepts
 
-== Development
+== Development strategies
 
 === Modules
 
@@ -89,9 +91,9 @@ include::{includedir}/Run/index.adoc[]
 
 ==== Common concepts
 
-==== Available Javascript libraries
+===== Available Javascript libraries
 
-==== Available Web services
+===== Available Web services
 
 ==== Themes
 
@@ -127,6 +129,14 @@ include::{includedir}/Run/index.adoc[]
 
 ==== Modifying it for existing services
 
+=== Expando / custom attributes
+
+==== API reference
+
+==== Using it in custom services
+
+==== Modifying it for existing services
+
 === Import / Export framework
 
 ==== API reference
@@ -135,7 +145,7 @@ include::{includedir}/Run/index.adoc[]
 
 ==== Modifying it for existing services
 
-=== Workflow framework
+=== Indexing 
 
 ==== API reference
 
@@ -151,11 +161,61 @@ include::{includedir}/Run/index.adoc[]
 
 ==== Modifying it for existing services
 
+=== Workflow framework
+
+==== API reference
+
+==== Using it in custom services
+
+==== Modifying it for existing services
+
 === ...
 
 ==== Using it in custom services
 
 ==== Modifying it for existing services
+
+== Applications
+
+=== Blogs
+
+==== API reference
+
+==== Configuration
+
+==== Customization
+
+=== Documents and media
+
+==== API reference
+
+==== Configuration
+
+==== Customization
+
+=== User management
+
+==== API reference
+
+==== Configuration
+
+==== Customization
+
+=== Web Content
+
+==== API reference
+
+==== Configuration
+
+==== Customization
+
+=== ...
+
+==== API reference
+
+==== Configuration
+
+==== Customization
 
 == Crosscutting concepts
 
@@ -193,12 +253,30 @@ include::{includedir}/Run/index.adoc[]
 
 === Clustering
 
-== Testing
+== DevOps practices
 
-=== Testing services
+=== Testing
 
-=== Testing portlets
+==== Unit tests
 
-=== Testing UIs
+===== Testing services
 
-== Upgrade
+===== Testing portlets
+
+===== Testing UIs
+
+==== Integration tests
+
+===== Wiring components 
+
+===== Mocking
+
+=== Continuos integration
+
+=== Upgrade
+
+[appendix]
+== List of all extension points
+
+[appendix]
+== Tests provided with @product@

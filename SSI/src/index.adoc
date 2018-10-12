@@ -18,26 +18,27 @@ This section contains practical tutorials explaining how to achieve a desired re
 
 === User Management
 
-* link:#[How to customise the login screen]
-* link:#[How to add social login]
-* link:#[...]
+* How to customize the login screen
+* How to add social login
+* ...
 
 === Deployment
 
-* link:#[How to install @prodcut@ on AWS]
-* link:#[How to install @prodcut@ on OpenShift]
-* link:#[...]
+* How to install @prodcut@ on AWS
+* How to install @prodcut@ on OpenShift
+* ...
 
 === Tools
 
-* link:#[How to configure Eclipse]
-* link:#[How to configure IntelliJ IDEA]
-* link:#[...]
+* How to configure Eclipse
+* How to configure IntelliJ IDEA
+* ...
 
 === ...
 
-* link:#[...]
-* link:#[...]
+* ...
+* ...
+* ...
 
 
 
@@ -45,11 +46,19 @@ This section contains practical tutorials explaining how to achieve a desired re
 
 This section provides information about the tools that make it easier to work with the portal
 
-* link:#[Blade and Workspace]
-* link:#[Maven]
-* link:#[Gradle]
-* link:#[NPM]
-* link:#[...]
+=== Build tools
+
+* Blade and Workspace
+* Maven
+* Gradle
+* NPM
+* ...
+
+=== Other tools
+
+* Database upgrade
+* ...
+
 
 == Related technologies 
 
@@ -57,22 +66,34 @@ This section provides information about 3rd party technologies used in @product@
 
 === Technologies
 
-* link:#[Portlet]
-* link:#[OSGi]
-* link:#[--Spring--]
-* link:#[...]
+* Portlet
+* OSGi
+* Spring
+* ...
 
 === Products
 
 * link:Related/Elasticsearch[Elasticsearch]
 * link:Related/Solr[Solr]
-* link:#[...]
+* ...
 
 == Extensions
 
 This section provides information about extensions of the @product@ available on http://liferay.com/marketplace[Marketplace] or via other channels.
 
-link:Extensions[Go to extensions]
+=== Markeplace apps
+
+* Audience targeting
+* Liferay Push 
+* SAML connector
+* ...
+
+=== Products  
+* Commerce
+* Analytics Cloud
+* DXP Cloud
+* ... 
+
 
 
 
